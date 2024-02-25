@@ -101,6 +101,12 @@ module.exports = {
           data: [],
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      return res.status(400).json({
+        status: "error",
+        message: "Something wrong",
+        data: [],
+      });
+    }
   },
 };
