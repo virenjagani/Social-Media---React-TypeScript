@@ -8,6 +8,7 @@ const authSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true },
   city: { type: String, required: true },
   province: { type: String, required: true },
+  accessToken: { type: String, default: "" },
 });
 
 const authModel = mongoose.model("auth", authSchema);
