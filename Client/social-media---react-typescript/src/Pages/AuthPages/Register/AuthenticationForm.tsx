@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import "./AuthenticationForm.style.css";
+import { useDispatch } from "react-redux";
 
 function Register() {
   const [inLogin, setInLogin] = useState<boolean>(true);
@@ -7,6 +8,8 @@ function Register() {
   const signInFormRef = useRef<HTMLFormElement | null>(null);
   const signInTextRef = useRef<HTMLDivElement | null>(null);
   const loginButtonRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useDispatch()
 
   const handleSignIn = () => {
     if (signInFormRef.current && signInTextRef.current) {
@@ -26,6 +29,14 @@ function Register() {
     }
     setInLogin(false);
   };
+
+  const handleFormSignup = () =>{
+    // dispatch({type})
+  }
+
+  const handleFormSignIn = () =>{
+
+  }
 
   return (
     <div className="wrapper">
@@ -65,12 +76,12 @@ function Register() {
           <div className="slider-tab"></div>
         </div>
         <div className="form-inner">
-          <form action="#" className="login" ref={signInFormRef}>
+          <form  className="login" onSubmit={()=>handleFormSignIn()} ref={signInFormRef}>
             <div className="field">
-              <input type="text" placeholder="Email Address" required />
+              <input type="text" placeholder="Email Address"  />
             </div>
             <div className="field">
-              <input type="password" placeholder="Password" required />
+              <input type="password" placeholder="Password"  />
             </div>
             <div className="pass-link">
               <a href="#">Forgot password?</a>
@@ -83,7 +94,9 @@ function Register() {
               Not a member? <a href="">Signup now</a>
             </div>
           </form>
-          <form action="#" className="signup">
+
+          
+          <form onSubmit={()=>handleFormSignup()} className="signup">
             <div className="field">
               <input type="text" placeholder="Email Address" required />
             </div>
