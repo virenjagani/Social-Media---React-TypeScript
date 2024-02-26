@@ -19,14 +19,14 @@ export interface Data {
 
 export type Loading = boolean;
 export type Status = "success" | "error" | "pendding";
-export type Message = string | null;
+export type Message = string | null | '';
 
-export type Errortype = Error | null;
+export type Errortype = Error | null ;
 
 export interface InitialState {
   loading: Loading;
-  error: Error | null;
-  message: Message | '';
+  error: Errortype;
+  message: Message;
   data:
     | {
         status: Status;

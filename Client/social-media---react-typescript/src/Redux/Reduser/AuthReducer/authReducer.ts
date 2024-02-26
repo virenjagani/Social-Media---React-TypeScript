@@ -23,7 +23,7 @@ export const makeLoading = (payload: Loading): MakeLoading => ({
 });
 
 export const setErrorAuth = (payload: Errortype): SetErrorAuth => ({
-  type: MAKE_LOADING_AUTH,
+  type: SET_ERROR_AUTH,
   payload,
 });
 
@@ -35,25 +35,30 @@ export const setRegisterAuth = (payload: InitialState): SetRegisterAuth => ({
 const initialState: InitialState = {
   loading: false,
   error: null,
-  message: null,
+  message: "",
   data: [],
 };
 
 export const authReducer = (
   state: InitialState = initialState,
   { payload, type }: AuthActionType
-) => {
+): InitialState => {
   switch (type) {
     case MAKE_LOADING_AUTH:
       return {
         ...state,
         loading: true,
       };
-    case SET_ERROR_AUTH:
-      return {
-        ...state,
-        error: payload,
-      };
+    // case SET_ERROR_AUTH:
+    //   if (typeof payload === Error) {
+    //     return {
+    //       ...state,
+    //       error: payload,
+    //     };
+    //   }
+    //   return {
+    //     ...state,
+    //   };
     case SET_REGISTER_AUTH:
       if (typeof payload === "object" && payload !== null) {
         return {

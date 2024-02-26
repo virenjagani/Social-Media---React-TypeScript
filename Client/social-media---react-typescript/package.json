@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.7",
     "formik": "^2.4.5",
     "react": "^18.2.0",
@@ -27,6 +28,7 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/redux-logger": "^3.0.13",
+    "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
