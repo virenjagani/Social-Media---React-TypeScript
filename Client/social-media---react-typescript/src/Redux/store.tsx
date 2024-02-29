@@ -1,4 +1,5 @@
 import { Store, configureStore } from "@reduxjs/toolkit";
+
 import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 import storage from "redux-persist/lib/storage";
@@ -16,7 +17,7 @@ const persistConfig = {
   // blacklist:['REDUCER_NAME']
 };
 
-const persistedReducer = persistReducer<RootState, any>(
+const persistedReducer = persistReducer<any, any>(
   persistConfig,
   rootReducer
 );
