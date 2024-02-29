@@ -31,7 +31,7 @@ export interface InitialState {
     | {
         status: Status;
         message: Message;
-        data: Data;
+        data: Data | [];
       }
     | [];
 }

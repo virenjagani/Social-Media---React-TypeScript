@@ -50,22 +50,19 @@ export const authReducer = (
         loading: true,
       };
     // case SET_ERROR_AUTH:
-    //   if (typeof payload === Error) {
+
     //     return {
     //       ...state,
     //       error: payload,
     //     };
-    //   }
-    //   return {
-    //     ...state,
-    //   };
+
     case SET_REGISTER_AUTH:
       if (typeof payload === "object" && payload !== null) {
         return {
           ...state,
           loading: false,
           error: null,
-          message: payload.message,
+          message: payload.message || "",
         };
       } else {
         return state;
