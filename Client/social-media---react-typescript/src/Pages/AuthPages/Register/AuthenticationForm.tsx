@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./AuthenticationForm.style.css";
 import { Formik } from "formik";
+import * as Yup from "yup";
 
 const initialValueSignUp = {
   firstName: "",
@@ -16,6 +17,23 @@ const initialValueSignIn = {
   email: "",
   password: "",
 };
+
+const validationSchemaSignUp = Yup.object().shape({
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  phoneNumber: Yup.string().required("Phone Number is required"),
+  password: Yup.string().required("Password is required"),
+  city: Yup.string().required("City is required"),
+  province: Yup.string().required("Province is required"),
+});
+
+const validationSchemaSignIn = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
 function Register() {
   const [inLogin, setInLogin] = useState<boolean>(true);
@@ -44,7 +62,7 @@ function Register() {
   };
 
   useEffect(() => {
-    console.log(inLogin);
+    console.log(inLogin, "inLogin");
   }, [inLogin]);
 
   return (
@@ -89,6 +107,7 @@ function Register() {
           {inLogin && (
             <Formik
               initialValues={initialValueSignIn}
+              validationSchema={validationSchemaSignIn}
               onSubmit={(values, { setSubmitting }) => {
                 console.log(values);
                 setSubmitting(false);
@@ -119,7 +138,9 @@ function Register() {
                       value={values.email}
                     />
                   </div>
-                  {errors.email && touched.email && errors.email}
+                  <p style={{ color: "red" }}>
+                    {errors.email && touched.email && errors.email}
+                  </p>
                   <div className="field">
                     <input
                       type="password"
@@ -129,8 +150,15 @@ function Register() {
                       onBlur={handleBlur}
                       value={values.password}
                     />
-                    {errors.password && touched.password && errors.password}
+                    <p style={{ color: "red" }}>
+                      {errors.password && touched.password && errors.password}
+                    </p>
                   </div>
+                  {errors.password && touched.password && (
+                    <>
+                      <br />
+                    </>
+                  )}
                   <div className="pass-link">
                     <a href="#">Forgot password?</a>
                   </div>
@@ -148,6 +176,7 @@ function Register() {
           {!inLogin && (
             <Formik
               initialValues={initialValueSignUp}
+              validationSchema={validationSchemaSignUp}
               onSubmit={(values, { setSubmitting }) => {
                 console.log(values);
                 setSubmitting(false);
