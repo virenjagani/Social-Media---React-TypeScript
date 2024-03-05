@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import "./AuthenticationForm.style.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useAppDispatch } from "../../../Redux/store";
+import { GET_LOGIN_AUTH, GET_SIGNUP_AUTH } from "../../../Redux/Reducers/Slices/authAction";
 
 const initialValueSignUp = {
   firstName: "",
@@ -37,6 +39,8 @@ const validationSchemaSignIn = Yup.object().shape({
 
 function Register() {
   const [inLogin, setInLogin] = useState<boolean>(true);
+
+  const dispatch = useAppDispatch()
 
   const signInFormRef = useRef<HTMLFormElement | null>(null);
   const signInTextRef = useRef<HTMLDivElement | null>(null);
@@ -109,7 +113,7 @@ function Register() {
               initialValues={initialValueSignIn}
               validationSchema={validationSchemaSignIn}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
+                dispatch({type:GET_LOGIN_AUTH,payload:values})
                 setSubmitting(false);
               }}
               enableReinitialize
@@ -178,7 +182,9 @@ function Register() {
               initialValues={initialValueSignUp}
               validationSchema={validationSchemaSignUp}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
+
+                dispatch({type:GET_SIGNUP_AUTH,payload:values})
+
                 setSubmitting(false);
               }}
               enableReinitialize
