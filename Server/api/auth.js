@@ -42,9 +42,9 @@ module.exports = {
         });
       }
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: "error",
-        message: "Something wrong",
+        message: "Internal server error!",
         data: [],
       });
     }
@@ -102,9 +102,9 @@ module.exports = {
         });
       }
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: "error",
-        message: "Something wrong",
+        message: "Internal server error!",
         data: [],
       });
     }
