@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { AuthSlice } from "./Reducers/authSlice";
+import { AuthSlice } from "./Reducers/Slices/authSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import createSagaMiddleware, { AnyAction } from "redux-saga";
 import logger from "redux-logger";
 import { watcherSaga } from "./Sagas/watcherSaga";
 import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
+import { Persistor, persistReducer, persistStore } from "redux-persist";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -29,6 +29,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(...middleware),
 });
 sagaMiddleware.run(watcherSaga);
+
+export const persistor: Persistor = persistStore(store);
 
 export const useAppDispatch: () => typeof store.dispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<
